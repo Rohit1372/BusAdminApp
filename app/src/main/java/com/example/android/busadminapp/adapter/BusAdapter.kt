@@ -1,18 +1,19 @@
-package com.example.android.busadminapp
+package com.example.android.busadminapp.adapter
 
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.example.android.busadminapp.activity.Routes
+import com.example.android.busadminapp.R
+import com.example.android.busadminapp.model.Bus
 
-class UserAdapter(val context:Context,val userList:ArrayList<UserData>):RecyclerView.Adapter<UserAdapter.UserViewHolder>(){
+class BusAdapter(val context:Context, val userList:ArrayList<Bus>):RecyclerView.Adapter<BusAdapter.BusAdapterViewHolder>(){
 
-    inner class UserViewHolder(val v: View):RecyclerView.ViewHolder(v){
+    inner class BusAdapterViewHolder(val v: View):RecyclerView.ViewHolder(v){
         val from = v.findViewById<TextView>(R.id.from_list_item)
         val arrive = v.findViewById<TextView>(R.id.arrive_list_item)
         val serv = v.findViewById<TextView>(R.id.busService_list_item)
@@ -24,13 +25,13 @@ class UserAdapter(val context:Context,val userList:ArrayList<UserData>):Recycler
         val viewRoutes = v.findViewById<TextView>(R.id.viewRoutes)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BusAdapterViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val v = inflater.inflate(R.layout.list_item,parent,false)
-        return UserViewHolder(v)
+        return BusAdapterViewHolder(v)
     }
 
-    override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: BusAdapterViewHolder, position: Int) {
         val newList = userList[position]
         holder.from.text = newList.from
         holder.arrive.text = newList.arrive
@@ -41,7 +42,7 @@ class UserAdapter(val context:Context,val userList:ArrayList<UserData>):Recycler
         holder.arriveTime.text = newList.arrivalTime
         holder.price.text = newList.rate
         holder.viewRoutes.setOnClickListener {
-            val intent = Intent(context,MainActivity2::class.java)
+            val intent = Intent(context, Routes::class.java)
             context.startActivity(intent)
         }
     }

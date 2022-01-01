@@ -1,6 +1,6 @@
-package com.example.android.busadminapp
+package com.example.android.busadminapp.model
 
-data class UserData (
+data class Bus (
     val from :String,
     val arrive :String,
     val service : String,

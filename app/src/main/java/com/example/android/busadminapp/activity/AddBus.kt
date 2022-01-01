@@ -1,4 +1,4 @@
-package com.example.android.busadminapp
+package com.example.android.busadminapp.activity
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
@@ -8,16 +8,14 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.example.android.busadminapp.R
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.util.*
 import kotlin.collections.HashMap
-import com.google.firebase.firestore.FirebaseFirestore as FirebaseFirestore1
 
-class SendData : AppCompatActivity() {
+class AddBus : AppCompatActivity() {
 
     private lateinit var from : EditText
     private lateinit var to : EditText
@@ -31,7 +29,7 @@ class SendData : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_send_data)
+        setContentView(R.layout.activity_add_bus)
 
         from = findViewById(R.id.from)
         to = findViewById(R.id.to)
@@ -131,7 +129,7 @@ class SendData : AppCompatActivity() {
 
                 Toast.makeText(this,"Information added successfully",Toast.LENGTH_SHORT).show()
 
-                val intent = Intent(this,MainActivity::class.java)
+                val intent = Intent(this, Buses::class.java)
                 startActivity(intent)
 
             }.addOnFailureListener {

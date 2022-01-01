@@ -1,29 +1,25 @@
-package com.example.android.busadminapp
+package com.example.android.busadminapp.activity
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.TextUtils
-import android.util.Log
-import android.view.LayoutInflater
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.android.busadminapp.R
+import com.example.android.busadminapp.adapter.BusAdapter
+import com.example.android.busadminapp.model.Bus
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
-class MainActivity : AppCompatActivity() {
+class Buses : AppCompatActivity() {
 
     private lateinit var addingBtn : FloatingActionButton
     private lateinit var recyclerView: RecyclerView
-    private lateinit var userList : ArrayList<UserData>
-    private lateinit var userAdapter: UserAdapter
+    private lateinit var userList : ArrayList<Bus>
+    private lateinit var busAdapter: BusAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,13 +30,13 @@ class MainActivity : AppCompatActivity() {
         addingBtn = findViewById(R.id.addingBtn)
         recyclerView = findViewById(R.id.recyclerView)
 
-        userAdapter = UserAdapter(this,userList)
+        busAdapter = BusAdapter(this,userList)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = userAdapter
+        recyclerView.adapter = busAdapter
 
         addingBtn.setOnClickListener {
-            val intent = Intent(this,SendData::class.java)
+            val intent = Intent(this, AddBus::class.java)
             startActivity(intent)
         }
 
@@ -62,10 +58,10 @@ class MainActivity : AppCompatActivity() {
                     val obj7 = values["Arrival Time"].toString()
                     val obj8 = values["Price"].toString()
 
-                    userList.add(UserData(obj1,obj2,obj3,obj4,obj5,obj6,obj7,obj8))
+                    userList.add(Bus(obj1,obj2,obj3,obj4,obj5,obj6,obj7,obj8))
                 }
 
-                userAdapter.notifyDataSetChanged()
+                busAdapter.notifyDataSetChanged()
 
             }.addOnFailureListener {
                 Toast.makeText(this,"${it}",Toast.LENGTH_SHORT).show()

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_vertical"
-    tools:context=".Send_Data2">
+    tools:context=".activity.AddRoute">
 
     <LinearLayout
         android:layout_width="match_parent"

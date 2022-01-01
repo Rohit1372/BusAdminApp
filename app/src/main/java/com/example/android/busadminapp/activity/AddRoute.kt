@@ -1,4 +1,4 @@
-package com.example.android.busadminapp
+package com.example.android.busadminapp.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,11 +6,11 @@ import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.example.android.busadminapp.R
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import org.w3c.dom.Text
 
-class Send_Data2 : AppCompatActivity() {
+class AddRoute : AppCompatActivity() {
 
     private lateinit var stopNo : EditText
     private lateinit var stopAt : EditText
