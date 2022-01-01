@@ -11,44 +11,44 @@ import com.example.android.busadminapp.activity.Routes
 import com.example.android.busadminapp.R
 import com.example.android.busadminapp.model.Bus
 
-class BusAdapter(val context:Context, val userList:ArrayList<Bus>):RecyclerView.Adapter<BusAdapter.BusAdapterViewHolder>(){
+class BusAdapter(private val context:Context, private val busList:ArrayList<Bus>):RecyclerView.Adapter<BusAdapter.BusAdapterViewHolder>(){
 
-    inner class BusAdapterViewHolder(val v: View):RecyclerView.ViewHolder(v){
-        val from = v.findViewById<TextView>(R.id.from_list_item)
-        val arrive = v.findViewById<TextView>(R.id.arrive_list_item)
-        val serv = v.findViewById<TextView>(R.id.busService_list_item)
-        val busNo = v.findViewById<TextView>(R.id.busNumber_list_item)
-        val date = v.findViewById<TextView>(R.id.date_list_item)
-        val startTime = v.findViewById<TextView>(R.id.time1_list_item)
-        val arriveTime = v.findViewById<TextView>(R.id.time3_list_item)
-        val price = v.findViewById<TextView>(R.id.rate_list_item)
-        val viewRoutes = v.findViewById<TextView>(R.id.viewRoutes)
+    inner class BusAdapterViewHolder(view: View):RecyclerView.ViewHolder(view){
+        val from :TextView = view.findViewById(R.id.from_list_item)
+        val to:TextView  = view.findViewById(R.id.to_list_item)
+        val busService:TextView  = view.findViewById(R.id.busService_list_item)
+        val busNo:TextView  = view.findViewById(R.id.busNumber_list_item)
+        val date:TextView  = view.findViewById(R.id.date_list_item)
+        val startTime:TextView  = view.findViewById(R.id.start_time_list_item)
+        val arrivalTime:TextView  = view.findViewById(R.id.arrival_time_list_item)
+        val rate:TextView  = view.findViewById(R.id.rate_list_item)
+        val viewRoutes:TextView  = view.findViewById(R.id.viewRoutes)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BusAdapterViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val v = inflater.inflate(R.layout.bus_single_item_view,parent,false)
-        return BusAdapterViewHolder(v)
+        val view = inflater.inflate(R.layout.bus_single_item_view,parent,false)
+        return BusAdapterViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: BusAdapterViewHolder, position: Int) {
-        val newList = userList[position]
-        holder.from.text = newList.from
-        holder.arrive.text = newList.arrive
-        holder.serv.text  = newList.service
-        holder.busNo.text = newList.busNo
-        holder.date.text = newList.date
-        holder.startTime.text = newList.startTime
-        holder.arriveTime.text = newList.arrivalTime
-        holder.price.text = newList.rate
+        val currentBus = busList[position]
+        holder.from.text = currentBus.from
+        holder.to.text = currentBus.to
+        holder.busService.text  = currentBus.service
+        holder.busNo.text = currentBus.busNo
+        holder.date.text = currentBus.date
+        holder.startTime.text = currentBus.startTime
+        holder.arrivalTime.text = currentBus.arrivalTime
+        holder.rate.text = currentBus.price
         holder.viewRoutes.setOnClickListener {
-            val intent = Intent(context, Routes::class.java)
+            val intent = Intent(context, Routes::class.java).putExtra("id",currentBus.id)
             context.startActivity(intent)
         }
     }
 
     override fun getItemCount(): Int {
-        return userList.size
+        return busList.size
     }
 
 }

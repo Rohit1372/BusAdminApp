@@ -11,20 +11,26 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/stopNo_list_item"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="Stop No. "
             android:textSize="25sp"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/stopAt_list_item"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="Stop At"
             android:textSize="25sp"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/stopTime_list_item"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="At Time"
             android:textSize="25sp"/>
 

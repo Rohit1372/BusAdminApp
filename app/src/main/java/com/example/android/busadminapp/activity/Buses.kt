@@ -16,26 +16,26 @@ import com.google.firebase.ktx.Firebase
 
 class Buses : AppCompatActivity() {
 
-    private lateinit var addingBtn : FloatingActionButton
+    private lateinit var addBus : FloatingActionButton
     private lateinit var recyclerView: RecyclerView
-    private lateinit var userList : ArrayList<Bus>
+    private lateinit var busList : ArrayList<Bus>
     private lateinit var busAdapter: BusAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_buses)
 
-        userList = ArrayList()
+        busList = ArrayList()
 
-        addingBtn = findViewById(R.id.addingBtn)
+        addBus = findViewById(R.id.addBus)
         recyclerView = findViewById(R.id.recyclerView)
 
-        busAdapter = BusAdapter(this,userList)
+        busAdapter = BusAdapter(this,busList)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = busAdapter
 
-        addingBtn.setOnClickListener {
+        addBus.setOnClickListener {
             val intent = Intent(this, AddBus::class.java)
             startActivity(intent)
         }
@@ -45,26 +45,26 @@ class Buses : AppCompatActivity() {
         db.collection("Buses").orderBy("From", Query.Direction.ASCENDING)
             .get()
             .addOnSuccessListener {
-                var result = it.documents
+                val result = it.documents
 
                 for ( values in result ){
+                    val id = values.id
+                    val from = values["From"].toString()
+                    val to = values["To"].toString()
+                    val busService = values["Bus Service"].toString()
+                    val busNo = values["Bus Number"].toString()
+                    val date = values["Date"].toString()
+                    val startingTime = values["Starting Time"].toString()
+                    val arrivalTime = values["Arrival Time"].toString()
+                    val price = values["Price"].toString()
 
-                    val obj1 = values["From"].toString()
-                    val obj2 = values["To"].toString()
-                    val obj3 = values["Bus Service"].toString()
-                    val obj4 = values["Bus Number"].toString()
-                    val obj5 = values["Date"].toString()
-                    val obj6 = values["Starting Time"].toString()
-                    val obj7 = values["Arrival Time"].toString()
-                    val obj8 = values["Price"].toString()
-
-                    userList.add(Bus(obj1,obj2,obj3,obj4,obj5,obj6,obj7,obj8))
+                    busList.add(Bus(id,from,to,busService,busNo,date,startingTime,arrivalTime,price))
                 }
 
                 busAdapter.notifyDataSetChanged()
 
             }.addOnFailureListener {
-                Toast.makeText(this,"${it}",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"$it",Toast.LENGTH_SHORT).show()
             }
 
     }

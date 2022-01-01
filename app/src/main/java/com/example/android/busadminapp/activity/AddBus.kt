@@ -25,7 +25,7 @@ class AddBus : AppCompatActivity() {
     private lateinit var startingTime :EditText
     private lateinit var arrivalTime : EditText
     private lateinit var price : EditText
-    private lateinit var sendBtn : Button
+    private lateinit var addBus : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,9 +39,9 @@ class AddBus : AppCompatActivity() {
         startingTime = findViewById(R.id.startingTime)
         arrivalTime = findViewById(R.id.arrivalTime)
         price = findViewById(R.id.price)
-        sendBtn = findViewById(R.id.sendData)
+        addBus = findViewById(R.id.addBus)
 
-        sendBtn.setOnClickListener {
+        addBus.setOnClickListener {
             val from = from.text.toString()
             val to = to.text.toString()
             val busService = busService.text.toString()
@@ -112,28 +112,28 @@ class AddBus : AppCompatActivity() {
 
     private fun saveFireStore(from : String, to : String, busService:String, busNo:String, date:String, startingTime:String, arrivalTime:String, price:String){
         val db = Firebase.firestore
-        val user : MutableMap<String,Any> = HashMap()
+        val bus : MutableMap<String,Any> = HashMap()
 
-        user["From"] = from
-        user["To"] = to
-        user["Bus Service"] = busService
-        user["Bus Number"] = busNo
-        user["Date"] = date
-        user["Starting Time"] = startingTime
-        user["Arrival Time"] = arrivalTime
-        user["Price"] = price
+        bus["From"] = from
+        bus["To"] = to
+        bus["Bus Service"] = busService
+        bus["Bus Number"] = busNo
+        bus["Date"] = date
+        bus["Starting Time"] = startingTime
+        bus["Arrival Time"] = arrivalTime
+        bus["Price"] = price
 
         db.collection("Buses")
-            .add(user)
+            .add(bus)
             .addOnCompleteListener {
 
-                Toast.makeText(this,"Information added successfully",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"Bus added successfully",Toast.LENGTH_SHORT).show()
 
                 val intent = Intent(this, Buses::class.java)
                 startActivity(intent)
 
             }.addOnFailureListener {
-            Toast.makeText(this,"Failed Info. Add",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,"Failed To Add Bus",Toast.LENGTH_SHORT).show()
             }
     }
 

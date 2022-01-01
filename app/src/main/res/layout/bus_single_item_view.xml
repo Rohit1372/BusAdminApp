@@ -36,24 +36,24 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/to_list_item"
+                android:id="@+id/textview_list_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="5dp"
-                android:fontFamily="sans-serif-thin"
                 android:layout_toRightOf="@id/from_list_item"
+                android:fontFamily="sans-serif-thin"
                 android:text="To"
                 android:textColor="@android:color/black"
                 android:textSize="19sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/arrive_list_item"
+                android:id="@+id/to_list_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/to_list_item"
+                android:layout_toRightOf="@id/textview_list_item"
                 android:fontFamily="sans-serif-thin"
                 android:maxLength="15"
                 android:maxLines="2"
@@ -108,14 +108,14 @@
             android:layout_below="@id/busService_list_item"
             android:layout_marginLeft="10dp"
             android:fontFamily="sans-serif-thin"
-            android:text="14/11/2021"
             android:maxLength="10"
+            android:text="14/11/2021"
             android:textColor="@android:color/darker_gray"
             android:textSize="16sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/time1_list_item"
+            android:id="@+id/start_time_list_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/date_list_item"
@@ -127,11 +127,11 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/time2_list_item"
+            android:id="@+id/time_list_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/date_list_item"
-            android:layout_toRightOf="@id/time1_list_item"
+            android:layout_toRightOf="@id/start_time_list_item"
             android:fontFamily="sans-serif-thin"
             android:text=" - "
             android:textColor="@android:color/holo_green_dark"
@@ -139,11 +139,11 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/time3_list_item"
+            android:id="@+id/arrival_time_list_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/date_list_item"
-            android:layout_toRightOf="@id/time2_list_item"
+            android:layout_toRightOf="@id/time_list_item"
             android:fontFamily="sans-serif-thin"
             android:text="9:00 PM"
             android:textColor="@android:color/darker_gray"

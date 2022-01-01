@@ -3,6 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Code/Android/App/app/src/main/res/layout/activity_add_bus.xml" value="0.35104166666666664" />
+        <entry key="..\:/Code/Android/App/app/src/main/res/layout/activity_add_route.xml" value="0.35104166666666664" />
+        <entry key="..\:/Code/Android/App/app/src/main/res/layout/activity_bus_route.xml" value="0.35104166666666664" />
+        <entry key="..\:/Code/Android/App/app/src/main/res/layout/activity_buses.xml" value="0.35104166666666664" />
+        <entry key="..\:/Code/Android/App/app/src/main/res/layout/activity_routes.xml" value="0.35104166666666664" />
+        <entry key="..\:/Code/Android/App/app/src/main/res/layout/bus_single_item_view.xml" value="0.35104166666666664" />
+        <entry key="..\:/Code/Android/App/app/src/main/res/layout/list_item.xml" value="0.35104166666666664" />
+        <entry key="..\:/Code/Android/App/app/src/main/res/layout/list_item2.xml" value="0.35104166666666664" />
+        <entry key="..\:/Code/Android/App/app/src/main/res/layout/route_single_item_view.xml" value="0.35104166666666664" />
         <entry key="..\:/Users/hp/AndroidStudioProjects/BusAdminApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.20260416666666667" />
         <entry key="..\:/Users/hp/AndroidStudioProjects/BusAdminApp/app/src/main/res/drawable/shape_background.xml" value="0.21296296296296297" />
         <entry key="..\:/Users/hp/AndroidStudioProjects/BusAdminApp/app/src/main/res/drawable/shape_button.xml" value="0.19722222222222222" />

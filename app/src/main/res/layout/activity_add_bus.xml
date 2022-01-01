@@ -187,11 +187,11 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/sendData"
+            android:id="@+id/addBus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_background"
-            android:text="SEND"
+            android:text="Add Bus"
             android:textStyle="bold"
             android:fontFamily="sans-serif-thin"
             android:textColor="@color/white"
