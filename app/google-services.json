@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "870013843974",
+    "firebase_url": "https://appbus-cdfe8-default-rtdb.firebaseio.com",
+    "project_id": "appbus-cdfe8",
+    "storage_bucket": "appbus-cdfe8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:870013843974:android:e663b862b8b6716c07e187",
+        "android_client_info": {
+          "package_name": "com.example.android.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "870013843974-0jdag6c9gtnvoq3lrfem4uqgr6m44qob.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBI5JSikZK63Ul7xLolSDtoe58TI7-bTys"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "870013843974-0jdag6c9gtnvoq3lrfem4uqgr6m44qob.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:870013843974:android:659926994285a4e507e187",
+        "android_client_info": {
+          "package_name": "com.example.android.busadminapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "870013843974-0jdag6c9gtnvoq3lrfem4uqgr6m44qob.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBI5JSikZK63Ul7xLolSDtoe58TI7-bTys"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "870013843974-0jdag6c9gtnvoq3lrfem4uqgr6m44qob.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
