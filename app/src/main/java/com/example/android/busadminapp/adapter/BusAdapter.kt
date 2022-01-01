@@ -27,7 +27,7 @@ class BusAdapter(val context:Context, val userList:ArrayList<Bus>):RecyclerView.
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BusAdapterViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val v = inflater.inflate(R.layout.list_item,parent,false)
+        val v = inflater.inflate(R.layout.bus_single_item_view,parent,false)
         return BusAdapterViewHolder(v)
     }
 

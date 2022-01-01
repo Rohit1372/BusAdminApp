@@ -19,7 +19,7 @@ class AddRoute : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_send_data2)
+        setContentView(R.layout.activity_add_route)
 
         stopNo = findViewById(R.id.stopNo)
         stopAt = findViewById(R.id.stopAt)

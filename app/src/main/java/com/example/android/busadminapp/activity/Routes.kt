@@ -12,7 +12,7 @@ class Routes : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_route)
+        setContentView(R.layout.activity_routes)
 
         floating2 = findViewById(R.id.floating2)
 
