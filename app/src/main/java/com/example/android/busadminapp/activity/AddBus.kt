@@ -131,6 +131,7 @@ class AddBus : AppCompatActivity() {
 
                 val intent = Intent(this, Buses::class.java)
                 startActivity(intent)
+                finish()
 
             }.addOnFailureListener {
             Toast.makeText(this,"Failed To Add Bus",Toast.LENGTH_SHORT).show()

@@ -38,6 +38,7 @@ class Buses : AppCompatActivity() {
         addBus.setOnClickListener {
             val intent = Intent(this, AddBus::class.java)
             startActivity(intent)
+            finish()
         }
 
         val db =  Firebase.firestore

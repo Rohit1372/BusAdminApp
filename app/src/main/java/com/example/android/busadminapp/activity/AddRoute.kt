@@ -60,6 +60,7 @@ class AddRoute : AppCompatActivity() {
 
                 val intent = Intent(this, Buses::class.java)
                 startActivity(intent)
+                finish()
 
             }.addOnFailureListener {
                 Toast.makeText(this, "Failed To Add Route", Toast.LENGTH_SHORT).show()
