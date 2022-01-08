@@ -31,13 +31,16 @@ class RouteAdapter( private val context : Context,private val routeList: ArrayLi
 
     override fun onBindViewHolder(holder: RouteAdapterViewHolder, position: Int) {
         val currentRoute = routeList[position]
-
         holder.stopAt.text=currentRoute.stopAt
         holder.stopNo.text=currentRoute.stopNumber
         holder.stopTime.text=currentRoute.stopTime
         holder.delete.setOnClickListener {
+            val route: MutableMap<String, Any> = HashMap()
+            route["Stop Number"] = currentRoute.stopNumber
+            route["Stop At"] = currentRoute.stopAt
+            route["Stop Time"] = currentRoute.stopTime
             val db = Firebase.firestore
-            db.collection("Buses").document(id).update("Routes",FieldValue.arrayRemove(currentRoute))
+            db.collection("Buses").document(id).update("Routes",FieldValue.arrayRemove(route))
                 .addOnSuccessListener {
                     routeList.remove(currentRoute)
                     Toast.makeText(context,"Route is deleted",Toast.LENGTH_SHORT).show()
