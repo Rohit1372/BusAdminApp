@@ -31,6 +31,9 @@ class AddBus : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_bus)
 
+        //Remove Action Bar
+        supportActionBar?.hide()
+
         from = findViewById(R.id.from)
         to = findViewById(R.id.to)
         busService = findViewById(R.id.busService)
@@ -86,7 +89,15 @@ class AddBus : AppCompatActivity() {
                     h = hour
                     AM_PM = "AM"
                 }
-                startingTime.setText("$h:$minute $AM_PM")
+
+                var m=""
+                if(minute>=0 && minute<10){
+                    m = "0$minute"
+                }
+                else{
+                    m = "$minute"
+                }
+                startingTime.setText("$h:$m $AM_PM")
             },hour,minute,false).show()
         }
 
@@ -104,10 +115,26 @@ class AddBus : AppCompatActivity() {
                     h = hour
                     AM_PM = "AM"
                 }
-                arrivalTime.setText("$h:$minute $AM_PM")
+
+                var m=""
+                if(minute>=0 && minute<10){
+                    m = "0$minute"
+                }
+                else{
+                    m = "$minute"
+                }
+
+                arrivalTime.setText("$h:$m $AM_PM")
             },hour,minute,false).show()
         }
 
+    }
+
+    override fun onBackPressed() {
+        val intent = Intent(this,Buses::class.java)
+        startActivity(intent)
+        finish()
+        super.onBackPressed()
     }
 
     private fun saveFireStore(from : String, to : String, busService:String, busNo:String, date:String, startingTime:String, arrivalTime:String, price:String){

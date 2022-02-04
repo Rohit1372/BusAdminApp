@@ -6,8 +6,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center_vertical"
     tools:context=".activity.AddRoute">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="140dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/from_add_routes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Yamuna Nagar"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:fontFamily="sans-serif-thin"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="To"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:fontFamily="sans-serif-thin"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:id="@+id/to_add_routes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Radaur"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:fontFamily="sans-serif-thin"
+            android:textAlignment="center"/>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

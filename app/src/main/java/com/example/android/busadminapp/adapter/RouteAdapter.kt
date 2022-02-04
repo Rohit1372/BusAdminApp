@@ -34,12 +34,18 @@ class RouteAdapter( private val context : Context,private val routeList: ArrayLi
         holder.stopAt.text=currentRoute.stopAt
         holder.stopNo.text=currentRoute.stopNumber
         holder.stopTime.text=currentRoute.stopTime
+
+        //delete routes from list
         holder.delete.setOnClickListener {
+
             val route: MutableMap<String, Any> = HashMap()
+
             route["Stop Number"] = currentRoute.stopNumber
             route["Stop At"] = currentRoute.stopAt
             route["Stop Time"] = currentRoute.stopTime
+
             val db = Firebase.firestore
+
             db.collection("Buses").document(id).update("Routes",FieldValue.arrayRemove(route))
                 .addOnSuccessListener {
                     routeList.remove(currentRoute)

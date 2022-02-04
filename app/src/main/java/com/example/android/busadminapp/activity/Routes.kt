@@ -37,6 +37,9 @@ class Routes : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_routes)
 
+        //Remove Action Bar
+        supportActionBar?.hide()
+
         fromRoute = findViewById(R.id.from_routes)
         toRoute = findViewById(R.id.to_routes)
         busServiceRoute = findViewById(R.id.busService_routes)
@@ -74,10 +77,13 @@ class Routes : AppCompatActivity() {
 
         val db =  Firebase.firestore
 
-        db.collection("Buses").document(id).get().addOnSuccessListener {
+        db.collection("Buses")
+            .document(id)
+            .get()
+            .addOnSuccessListener {
             val result: MutableMap<String, Any>? = it.data
                 val routesData = result?.get("Routes")
-if(routesData!=null){
+            if(routesData!=null){
                 val routes = routesData as ArrayList<*>
                 for (values in routes) {
                     var data = values as MutableMap<*, *>
@@ -96,9 +102,12 @@ if(routesData!=null){
             }
 
         addRoute.setOnClickListener {
-            val intent = Intent(this, AddRoute::class.java).putExtra("id",id)
+            val intent = Intent(this, AddRoute::class.java)
+                .putExtra("id",id)
+                .putExtra("From",fromR)
+                .putExtra("To",toR)
             startActivity(intent)
-            finish()
+            //finish()
         }
 
     }

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".activity.Buses">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <!--<com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
             android:minHeight="?attr/actionBarSize"
             android:theme="@style/ThemeOverlay.AppCompat.Dark"/>
 
-        <!--<com.google.android.material.tabs.TabLayout
+        &lt;!&ndash;<com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -47,16 +47,24 @@
                 android:layout_height="wrap_content"
                 android:text="@string/sign_up" />
 
-        </com.google.android.material.tabs.TabLayout>-->
+        </com.google.android.material.tabs.TabLayout>&ndash;&gt;
 
-    </com.google.android.material.appbar.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>-->
 
+    <!--<androidx.appcompat.widget.SearchView
+        android:id="@+id/country_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/busicon"
+        android:layout_below="@id/appBar"
+        android:textCursorDrawable="@null"
+        app:iconifiedByDefault="false"
+        app:queryBackground="@null" />-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/appBar"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"

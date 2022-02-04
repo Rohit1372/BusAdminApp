@@ -5,19 +5,24 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.busadminapp.activity.Routes
 import com.example.android.busadminapp.R
-import com.example.android.busadminapp.activity.Buses
+//import com.example.android.busadminapp.activity.Buses
 import com.example.android.busadminapp.model.Bus
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
-class BusAdapter(private val context:Context, private val busList:ArrayList<Bus>):RecyclerView.Adapter<BusAdapter.BusAdapterViewHolder>(){
+class BusAdapter(private val context:Context, private val busList:ArrayList<Bus>):RecyclerView.Adapter<BusAdapter.BusAdapterViewHolder>(),Filterable{
+
+    var countryFilterList : ArrayList<Bus>
+
+    init {
+        countryFilterList = ArrayList()
+        countryFilterList.addAll(busList)
+    }
 
     inner class BusAdapterViewHolder(view: View):RecyclerView.ViewHolder(view){
         val from :TextView = view.findViewById(R.id.from_list_item)
@@ -39,7 +44,8 @@ class BusAdapter(private val context:Context, private val busList:ArrayList<Bus>
     }
 
     override fun onBindViewHolder(holder: BusAdapterViewHolder, position: Int) {
-        val currentBus = busList[position]
+        //val currentBus = busList[position]
+        val currentBus = countryFilterList[position]
         holder.from.text = currentBus.from
         holder.to.text = currentBus.to
         holder.busService.text  = currentBus.service
@@ -61,7 +67,8 @@ class BusAdapter(private val context:Context, private val busList:ArrayList<Bus>
             context.startActivity(intent)
         }
 
-        //Delete item from firestore
+
+        //Delete Bus item from firestore
 
         holder.delete.setOnClickListener {
             val db = Firebase.firestore
@@ -75,10 +82,44 @@ class BusAdapter(private val context:Context, private val busList:ArrayList<Bus>
                     Toast.makeText(context,"Failed to delete data",Toast.LENGTH_SHORT).show()
                 }
         }
+
     }
 
     override fun getItemCount(): Int {
-        return busList.size
+        //return busList.size
+        return  countryFilterList.size
+    }
+
+
+    //Filter data
+
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                val charSearch = constraint.toString()
+                if (charSearch.isEmpty()) {
+                    countryFilterList = busList as ArrayList<Bus>
+                } else {
+                    val resultList = ArrayList<Bus>()
+                    for (row in busList) {
+                        if (row.from.toLowerCase().contains(constraint.toString().toLowerCase())
+                            || row.to.toLowerCase().contains(constraint.toString().toLowerCase())
+                        ) {
+                            resultList.add(row)
+                        }
+                    }
+                    countryFilterList = resultList
+                }
+                val filterResults = FilterResults()
+                filterResults.values = countryFilterList
+                return filterResults
+            }
+
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                countryFilterList = results?.values as ArrayList<Bus>
+                notifyDataSetChanged()
+            }
+        }
     }
 
 }

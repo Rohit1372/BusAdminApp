@@ -53,7 +53,7 @@
                 android:id="@+id/to_list_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@id/textview_list_item"
                 android:fontFamily="sans-serif-thin"
                 android:maxLength="15"
@@ -152,6 +152,17 @@
             android:textStyle="bold" />
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/busNumber_list_item"
+            android:layout_toLeftOf="@id/rate_list_item"
+            android:fontFamily="sans-serif-thin"
+            android:text="Rs. "
+            android:textColor="@android:color/holo_green_dark"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
             android:id="@+id/rate_list_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -159,7 +170,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
             android:fontFamily="sans-serif-thin"
-            android:text="Rs. 100"
+            android:text="100"
             android:textColor="@android:color/holo_green_dark"
             android:textSize="16sp"
             android:textStyle="bold" />

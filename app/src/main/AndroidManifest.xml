@@ -14,7 +14,8 @@
             android:exported="true" />
         <activity
             android:name=".activity.Routes"
-            android:exported="true" />
+            android:exported="true"
+            />
         <activity
             android:name=".activity.AddBus"
             android:exported="true" />
