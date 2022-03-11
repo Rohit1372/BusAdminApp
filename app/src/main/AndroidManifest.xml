@@ -10,12 +10,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BusAdminApp">
         <activity
+            android:name=".activity.LoginActivity"
+            android:exported="true" />
+        <activity
             android:name=".activity.AddRoute"
             android:exported="true" />
         <activity
             android:name=".activity.Routes"
-            android:exported="true"
-            />
+            android:exported="true" />
         <activity
             android:name=".activity.AddBus"
             android:exported="true" />
