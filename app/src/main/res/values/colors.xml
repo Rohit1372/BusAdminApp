@@ -7,5 +7,6 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="busicon">#387C9B</color>
+    <color name="busiconLight">#2a2673</color>
+    <color name="busicon">#2a2673</color>
 </resources>

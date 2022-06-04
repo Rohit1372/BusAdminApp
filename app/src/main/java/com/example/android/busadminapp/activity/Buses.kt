@@ -1,5 +1,6 @@
 package com.example.android.busadminapp.activity
 
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,6 +9,7 @@ import android.view.inputmethod.EditorInfo
 import androidx.appcompat.widget.SearchView
 import android.widget.Toast
 import android.widget.Toolbar
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.busadminapp.R
@@ -46,11 +48,24 @@ class Buses : AppCompatActivity() {
         addBus.setOnClickListener {
             val intent = Intent(this, AddBus::class.java)
             startActivity(intent)
-            finish()
+            //finish()
         }
 
         getData()
 
+    }
+
+    override fun onBackPressed() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Are you sure!")
+        builder.setMessage("Do you want to close this app?")
+        builder.setPositiveButton("Yes",{ dialogInterface : DialogInterface , i:Int ->
+            finish()
+        })
+        builder.setNegativeButton("No",{ dialogInterface : DialogInterface , i:Int ->
+        })
+        builder.create()
+        builder.show()
     }
 
     fun getData(){

@@ -1,5 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    >
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:elevation="5dp"
+        android:layout_alignParentLeft="true"
+        android:backgroundTint="@color/busicon"
+        app:cardCornerRadius="7dp">
+
+        <TextView
+            android:id="@+id/stopNo_list_item"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:text="StopNo. "
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:layout_margin="5dp"
+            android:textSize="18sp"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_toRightOf="@id/card1"
+        android:layout_toLeftOf="@id/card3"
+        android:elevation="5dp"
+        app:cardCornerRadius="7dp">
+
+        <TextView
+            android:id="@+id/stopAt_list_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Stop At"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:textSize="18sp"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="center"
+        android:elevation="5dp"
+        app:cardCornerRadius="7dp">
+
+        <ImageView
+            android:id="@+id/delete_route_list"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_margin="5dp"
+            android:src="@drawable/ic_action_delete"/>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
+
+<!--<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -54,4 +129,4 @@
 
     </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+</androidx.cardview.widget.CardView>-->

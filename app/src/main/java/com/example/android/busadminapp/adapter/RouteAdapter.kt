@@ -19,7 +19,7 @@ class RouteAdapter( private val context : Context,private val routeList: ArrayLi
     class RouteAdapterViewHolder(view: View):RecyclerView.ViewHolder(view){
         val stopNo :TextView = view.findViewById(R.id.stopNo_list_item)
         val stopAt :TextView = view.findViewById(R.id.stopAt_list_item)
-        val stopTime :TextView = view.findViewById(R.id.stopTime_list_item)
+        //val stopTime :TextView = view.findViewById(R.id.stopTime_list_item)
         val delete : ImageView = view.findViewById(R.id.delete_route_list)
     }
 
@@ -33,7 +33,7 @@ class RouteAdapter( private val context : Context,private val routeList: ArrayLi
         val currentRoute = routeList[position]
         holder.stopAt.text=currentRoute.stopAt
         holder.stopNo.text=currentRoute.stopNumber
-        holder.stopTime.text=currentRoute.stopTime
+        //holder.stopTime.text=currentRoute.stopTime
 
         //delete routes from list
         holder.delete.setOnClickListener {
@@ -42,7 +42,7 @@ class RouteAdapter( private val context : Context,private val routeList: ArrayLi
 
             route["Stop Number"] = currentRoute.stopNumber
             route["Stop At"] = currentRoute.stopAt
-            route["Stop Time"] = currentRoute.stopTime
+            //route["Stop Time"] = currentRoute.stopTime
 
             val db = Firebase.firestore
 

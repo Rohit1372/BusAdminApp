@@ -59,11 +59,11 @@ class BusAdapter(private val context:Context, private val busList:ArrayList<Bus>
                 .putExtra("id",currentBus.id)
                 .putExtra("from",holder.from.text)
                 .putExtra("to",holder.to.text)
-                .putExtra("bus service",holder.busService.text)
+                /*.putExtra("bus service",holder.busService.text)
                 .putExtra("bus no.",holder.busNo.text)
                 .putExtra("date",holder.date.text)
                 .putExtra("start time",holder.startTime.text)
-                .putExtra("arrival time",holder.arrivalTime.text)
+                .putExtra("arrival time",holder.arrivalTime.text)*/
             context.startActivity(intent)
         }
 

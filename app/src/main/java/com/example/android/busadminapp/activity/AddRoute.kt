@@ -23,50 +23,50 @@ class AddRoute : AppCompatActivity() {
 
     private lateinit var stopNo : EditText
     private lateinit var stopAt : EditText
-    private lateinit var stopTime : EditText
+    //private lateinit var stopTime : EditText
     private lateinit var addRoute : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_route)
 
-        //Remove Action Bar
-        supportActionBar?.hide()
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = "Add Bus Routes"
 
-        from = findViewById(R.id.from_add_routes)
-        to = findViewById(R.id.to_add_routes)
+        /*from = findViewById(R.id.from_add_routes)
+        to = findViewById(R.id.to_add_routes)*/
 
         val id :String = intent.getStringExtra("id").toString()
 
-        val routeFrom = intent.getStringExtra("From").toString()
-        val routeTo = intent.getStringExtra("To").toString()
+        /*val routeFrom = intent.getStringExtra("From").toString()
+        val routeTo = intent.getStringExtra("To").toString()*/
 
-        from.text = routeFrom
-        to.text = routeTo
+        /*from.text = routeFrom
+        to.text = routeTo*/
 
         stopNo = findViewById(R.id.stopNo)
         stopAt = findViewById(R.id.stopAt)
-        stopTime = findViewById(R.id.stopTime)
+       //stopTime = findViewById(R.id.stopTime)
 
         addRoute = findViewById(R.id.add_route)
 
         addRoute.setOnClickListener {
             val stopNo = stopNo.text.toString()
             val stopAt = stopAt.text.toString()
-            val stopTime = stopTime.text.toString()
+            //val stopTime = stopTime.text.toString()
 
-            if(TextUtils.isEmpty(stopNo) || TextUtils.isEmpty(stopAt) || TextUtils.isEmpty(stopTime) ){
+            if(TextUtils.isEmpty(stopNo) || TextUtils.isEmpty(stopAt) ){
                 Toast.makeText(this,"Please fill all the fields", Toast.LENGTH_SHORT).show()
             } else{
 
-                saveFireStore(stopNo,stopAt,stopTime,id)
+                saveFireStore(stopNo,stopAt,id)
 
             }
 
         }
 
 
-        stopTime.setOnClickListener {
+        /*stopTime.setOnClickListener {
             val time = Calendar.getInstance()
             val hour = time.get(Calendar.HOUR_OF_DAY)
             val minute = time.get(Calendar.MINUTE)
@@ -90,17 +90,17 @@ class AddRoute : AppCompatActivity() {
                 }
                 stopTime.setText("$h:$m $AM_PM")
             },hour,minute,false).show()
-        }
+        }*/
 
 
     }
 
-    private fun saveFireStore(stopNo : String, stopAt : String, stopTime:String, id:String) {
+    private fun saveFireStore(stopNo : String, stopAt : String, id:String) {
         val db = Firebase.firestore
         val route: MutableMap<String, Any> = HashMap()
         route["Stop Number"] = stopNo
         route["Stop At"] = stopAt
-        route["Stop Time"] = stopTime
+        //route["Stop Time"] = stopTime
 
         db.collection("Buses").document(id)
             .update("Routes", FieldValue.arrayUnion(route))
@@ -110,7 +110,6 @@ class AddRoute : AppCompatActivity() {
                 val intent = Intent(this, Buses::class.java)
                 startActivity(intent)
                 finish()
-
             }.addOnFailureListener {
                 Toast.makeText(this, "Failed To Add Route", Toast.LENGTH_SHORT).show()
             }
