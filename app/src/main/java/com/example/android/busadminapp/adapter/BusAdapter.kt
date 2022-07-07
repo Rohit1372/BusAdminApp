@@ -9,19 +9,18 @@ import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.busadminapp.activity.Routes
 import com.example.android.busadminapp.R
+import com.example.android.busadminapp.activity.BookedSeatsActivity
 //import com.example.android.busadminapp.activity.Buses
 import com.example.android.busadminapp.model.Bus
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
-class BusAdapter(private val context:Context, private val busList:ArrayList<Bus>):RecyclerView.Adapter<BusAdapter.BusAdapterViewHolder>(),Filterable{
+class BusAdapter(private val context:Context, private var busList:ArrayList<Bus>):RecyclerView.Adapter<BusAdapter.BusAdapterViewHolder>(){
 
-    var countryFilterList : ArrayList<Bus>
-
-    init {
-        countryFilterList = ArrayList()
-        countryFilterList.addAll(busList)
+    fun filtering(newFilteredList: ArrayList<Bus>) {
+        busList = newFilteredList
+        notifyDataSetChanged()
     }
 
     inner class BusAdapterViewHolder(view: View):RecyclerView.ViewHolder(view){
@@ -35,6 +34,7 @@ class BusAdapter(private val context:Context, private val busList:ArrayList<Bus>
         val rate:TextView  = view.findViewById(R.id.rate_list_item)
         val delete : ImageView = view.findViewById(R.id.delete_list_item)
         val viewRoutes:TextView  = view.findViewById(R.id.viewRoutes)
+        val listContent : RelativeLayout = view.findViewById(R.id.list_Content)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BusAdapterViewHolder {
@@ -44,8 +44,7 @@ class BusAdapter(private val context:Context, private val busList:ArrayList<Bus>
     }
 
     override fun onBindViewHolder(holder: BusAdapterViewHolder, position: Int) {
-        //val currentBus = busList[position]
-        val currentBus = countryFilterList[position]
+        val currentBus = busList[position]
         holder.from.text = currentBus.from
         holder.to.text = currentBus.to
         holder.busService.text  = currentBus.service
@@ -59,11 +58,12 @@ class BusAdapter(private val context:Context, private val busList:ArrayList<Bus>
                 .putExtra("id",currentBus.id)
                 .putExtra("from",holder.from.text)
                 .putExtra("to",holder.to.text)
-                /*.putExtra("bus service",holder.busService.text)
-                .putExtra("bus no.",holder.busNo.text)
-                .putExtra("date",holder.date.text)
-                .putExtra("start time",holder.startTime.text)
-                .putExtra("arrival time",holder.arrivalTime.text)*/
+            context.startActivity(intent)
+        }
+
+        holder.listContent.setOnClickListener {
+            val intent = Intent(context,BookedSeatsActivity::class.java)
+                .putExtra("id",currentBus.id)
             context.startActivity(intent)
         }
 
@@ -86,40 +86,7 @@ class BusAdapter(private val context:Context, private val busList:ArrayList<Bus>
     }
 
     override fun getItemCount(): Int {
-        //return busList.size
-        return  countryFilterList.size
-    }
-
-
-    //Filter data
-
-    override fun getFilter(): Filter {
-        return object : Filter() {
-            override fun performFiltering(constraint: CharSequence?): FilterResults {
-                val charSearch = constraint.toString()
-                if (charSearch.isEmpty()) {
-                    countryFilterList = busList as ArrayList<Bus>
-                } else {
-                    val resultList = ArrayList<Bus>()
-                    for (row in busList) {
-                        if (row.from.toLowerCase().contains(constraint.toString().toLowerCase())
-                            || row.to.toLowerCase().contains(constraint.toString().toLowerCase())
-                        ) {
-                            resultList.add(row)
-                        }
-                    }
-                    countryFilterList = resultList
-                }
-                val filterResults = FilterResults()
-                filterResults.values = countryFilterList
-                return filterResults
-            }
-
-            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                countryFilterList = results?.values as ArrayList<Bus>
-                notifyDataSetChanged()
-            }
-        }
+        return busList.size
     }
 
 }

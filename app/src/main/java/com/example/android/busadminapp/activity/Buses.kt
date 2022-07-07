@@ -40,6 +40,9 @@ class Buses : AppCompatActivity() {
         addBus = findViewById(R.id.addBus)
         recyclerView = findViewById(R.id.recyclerView)
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = "Buses List"
+
         busAdapter = BusAdapter(this,busList)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -53,19 +56,6 @@ class Buses : AppCompatActivity() {
 
         getData()
 
-    }
-
-    override fun onBackPressed() {
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("Are you sure!")
-        builder.setMessage("Do you want to close this app?")
-        builder.setPositiveButton("Yes",{ dialogInterface : DialogInterface , i:Int ->
-            finish()
-        })
-        builder.setNegativeButton("No",{ dialogInterface : DialogInterface , i:Int ->
-        })
-        builder.create()
-        builder.show()
     }
 
     fun getData(){
@@ -102,22 +92,36 @@ class Buses : AppCompatActivity() {
     //Searching
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-
         menuInflater.inflate(R.menu.search_buses,menu)
-        var searchItem=menu?.findItem(R.id.searchBtn)
-        var searchView=searchItem?.actionView as SearchView;
-        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE)
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
+
+        val item = menu?.findItem(R.id.searchBtn)
+        val searchView = item?.actionView as SearchView
+        searchView.queryHint = "Search here..."
+        searchView.maxWidth = Integer.MAX_VALUE
+        searchView.setOnQueryTextListener(object :SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(p0: String?): Boolean {
                 return false
             }
 
-            override fun onQueryTextChange(newText: String?): Boolean {
-                busAdapter.getFilter().filter(newText)
-                return false
+            override fun onQueryTextChange(p0: String?): Boolean {
+                Filtering(p0)
+                return true
             }
+
         })
+
+
         return true
+    }
+
+    private fun Filtering(p0: String?) {
+        val filteredList = ArrayList<Bus>()
+        for(i in busList){
+            if (i.from.toLowerCase().contains(p0.toString().toLowerCase()) || i.to.toLowerCase().contains(p0.toString().toLowerCase())){
+                filteredList.add(i)
+            }
+        }
+        busAdapter.filtering(filteredList)
     }
 
 }

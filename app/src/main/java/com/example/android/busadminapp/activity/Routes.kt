@@ -69,8 +69,7 @@ class Routes : AppCompatActivity() {
                         routeList.add(
                             Route(
                                 data["Stop Number"] as String,
-                                data["Stop At"] as String,
-                                //data["Stop Time"] as String
+                                data["Stop At"] as String
                             )
                         )
                     }

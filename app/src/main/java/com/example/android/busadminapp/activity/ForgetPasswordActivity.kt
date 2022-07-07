@@ -3,8 +3,10 @@ package com.example.android.busadminapp.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import com.example.android.busadminapp.R
 import com.google.android.gms.tasks.OnCompleteListener
@@ -15,6 +17,7 @@ class ForgetPasswordActivity : AppCompatActivity() {
 
     private lateinit var emailEt: EditText
     private lateinit var resetPasswordBtn: Button
+    lateinit var back_arrow : ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,11 +30,18 @@ class ForgetPasswordActivity : AppCompatActivity() {
 
         emailEt = findViewById(R.id.email_edt_text)
         resetPasswordBtn = findViewById(R.id.reset_pass_btn)
+        back_arrow = findViewById(R.id.back_arrow)
+
+        back_arrow.setOnClickListener{
+            finish()
+        }
 
         resetPasswordBtn.setOnClickListener {
             var email: String = emailEt.text.toString()
             if (TextUtils.isEmpty(email)) {
                 Toast.makeText(this, "Please enter email id", Toast.LENGTH_LONG).show()
+            }else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                Toast.makeText(this, "Invalid Email", Toast.LENGTH_SHORT).show()
             } else {
                 auth.sendPasswordResetEmail(email)
                     .addOnCompleteListener(this, OnCompleteListener { task ->

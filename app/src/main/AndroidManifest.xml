@@ -11,6 +11,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BusAdminApp">
         <activity
+            android:name=".activity.ProfileActivity"
+            android:exported="true"
+            android:parentActivityName=".activity.HomeActivity"/>
+        <activity
+            android:name=".activity.HomeActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.BookedSeatsActivity"
+            android:exported="true"
+            android:parentActivityName=".activity.Buses" />
+        <activity
             android:name=".activity.SplashScreenActivity"
             android:exported="true">
             <intent-filter>
@@ -31,27 +42,23 @@
         <activity
             android:name=".activity.AddRoute"
             android:exported="true"
-            tools:ignore="Instantiatable"
-            android:parentActivityName=".activity.Routes"
-            />
+            android:parentActivityName=".activity.Buses"
+            tools:ignore="Instantiatable" />
         <activity
             android:name=".activity.Routes"
             android:exported="true"
-            tools:ignore="Instantiatable"
             android:parentActivityName=".activity.Buses"
-            />
+            tools:ignore="Instantiatable" />
         <activity
             android:name=".activity.AddBus"
             android:exported="true"
-            tools:ignore="Instantiatable"
             android:parentActivityName=".activity.Buses"
-            />
+            tools:ignore="Instantiatable" />
         <activity
             android:name=".activity.Buses"
             android:exported="true"
-            tools:ignore="Instantiatable"
-            >
-        </activity>
+            android:parentActivityName=".activity.HomeActivity"
+            tools:ignore="Instantiatable" />
     </application>
 
 </manifest>

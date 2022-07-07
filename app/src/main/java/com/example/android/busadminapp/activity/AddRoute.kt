@@ -65,34 +65,6 @@ class AddRoute : AppCompatActivity() {
 
         }
 
-
-        /*stopTime.setOnClickListener {
-            val time = Calendar.getInstance()
-            val hour = time.get(Calendar.HOUR_OF_DAY)
-            val minute = time.get(Calendar.MINUTE)
-            TimePickerDialog(this, TimePickerDialog.OnTimeSetListener{ view, hour, minute->
-                var AM_PM =""
-                var h=0
-                if(hour>12){
-                    h = hour-12
-                    AM_PM = "PM"
-                }else{
-                    h = hour
-                    AM_PM = "AM"
-                }
-
-                var m=""
-                if(minute>=0 && minute<10){
-                    m = "0$minute"
-                }
-                else{
-                    m = "$minute"
-                }
-                stopTime.setText("$h:$m $AM_PM")
-            },hour,minute,false).show()
-        }*/
-
-
     }
 
     private fun saveFireStore(stopNo : String, stopAt : String, id:String) {
@@ -100,7 +72,6 @@ class AddRoute : AppCompatActivity() {
         val route: MutableMap<String, Any> = HashMap()
         route["Stop Number"] = stopNo
         route["Stop At"] = stopAt
-        //route["Stop Time"] = stopTime
 
         db.collection("Buses").document(id)
             .update("Routes", FieldValue.arrayUnion(route))
