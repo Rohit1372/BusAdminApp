@@ -4,8 +4,12 @@ import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.view.Menu
+import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.widget.ProgressBar
+import android.widget.RelativeLayout
 import androidx.appcompat.widget.SearchView
 import android.widget.Toast
 import android.widget.Toolbar
@@ -15,7 +19,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.android.busadminapp.R
 import com.example.android.busadminapp.adapter.BusAdapter
 import com.example.android.busadminapp.model.Bus
+import com.example.android.busadminapp.utils.NetworkHelper
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -30,6 +36,8 @@ class Buses : AppCompatActivity() {
     private lateinit var busList : ArrayList<Bus>
 
     private lateinit var busAdapter: BusAdapter
+
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +62,21 @@ class Buses : AppCompatActivity() {
             //finish()
         }
 
-        getData()
+        val relativeLayout : RelativeLayout = findViewById(R.id.relativeLayout)
+        progressBar = findViewById(R.id.progressBar)
+
+        //progressBar.visibility=View.VISIBLE
+
+        if(NetworkHelper.isNetworkConnected(this)){
+            getData()
+
+        }else{
+            progressBar.visibility=View.VISIBLE
+            Snackbar.make(relativeLayout,"Sorry! There is no network connection.Please try later",
+                Snackbar.LENGTH_INDEFINITE).show()
+        }
+
+       // getData()
 
     }
 
@@ -81,7 +103,7 @@ class Buses : AppCompatActivity() {
                         Bus(id,from,to,busService,busNo,date,startingTime,arrivalTime,price)
                     )
                 }
-
+                progressBar.visibility=View.GONE
                 busAdapter.notifyDataSetChanged()
 
             }.addOnFailureListener {

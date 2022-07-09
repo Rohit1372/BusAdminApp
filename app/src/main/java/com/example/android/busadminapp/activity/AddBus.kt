@@ -6,10 +6,14 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ScrollView
 import android.widget.Toast
 import com.example.android.busadminapp.R
+import com.example.android.busadminapp.utils.NetworkHelper
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.util.*
@@ -44,21 +48,29 @@ class AddBus : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = "Add Buses"
 
+        val layout : ScrollView = findViewById(R.id.addBusLayout)
+
         addBus.setOnClickListener {
-            val from = from.text.toString()
-            val to = to.text.toString()
-            val busService = busService.text.toString()
-            val busNo = busNo.text.toString()
-            val date = date.text.toString()
-            val startingTime = startingTime.text.toString()
-            val arrivalTime = arrivalTime.text.toString()
-            val price = price.text.toString()
+            if(NetworkHelper.isNetworkConnected(this)){
+                val from = from.text.toString()
+                val to = to.text.toString()
+                val busService = busService.text.toString()
+                val busNo = busNo.text.toString()
+                val date = date.text.toString()
+                val startingTime = startingTime.text.toString()
+                val arrivalTime = arrivalTime.text.toString()
+                val price = price.text.toString()
 
-            if(TextUtils.isEmpty(from) || TextUtils.isEmpty(to) || TextUtils.isEmpty(busService) || TextUtils.isEmpty(busNo) || TextUtils.isEmpty(date) || TextUtils.isEmpty(startingTime) || TextUtils.isEmpty(arrivalTime) || TextUtils.isEmpty(price) ){
-                Toast.makeText(this,"Please fill all the fields",Toast.LENGTH_SHORT).show()
-            } else{
+                if(TextUtils.isEmpty(from) || TextUtils.isEmpty(to) || TextUtils.isEmpty(busService) || TextUtils.isEmpty(busNo) || TextUtils.isEmpty(date) || TextUtils.isEmpty(startingTime) || TextUtils.isEmpty(arrivalTime) || TextUtils.isEmpty(price) ){
+                    Toast.makeText(this,"Please fill all the fields",Toast.LENGTH_SHORT).show()
+                } else{
 
-                saveFireStore(from,to,busService,busNo,date,startingTime,arrivalTime,price)
+                    saveFireStore(from,to,busService,busNo,date,startingTime,arrivalTime,price)
+                }
+
+            }else{
+                Snackbar.make(layout,"Sorry! There is no network connection.Please try later",
+                    Snackbar.LENGTH_SHORT).show()
             }
 
         }

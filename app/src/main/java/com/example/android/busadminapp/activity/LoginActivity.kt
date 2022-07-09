@@ -9,7 +9,9 @@ import android.util.Patterns
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import com.example.android.busadminapp.R
+import com.example.android.busadminapp.utils.NetworkHelper
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
@@ -80,26 +82,35 @@ class LoginActivity : AppCompatActivity() {
 
     private fun logIn(){
         loginLoginBtn.setOnClickListener {
-            var email: String = loginEmail.text.toString()
-            var password: String = loginPassword.text.toString()
 
-            if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
-                Toast.makeText(this@LoginActivity, "Please fill all the fields", Toast.LENGTH_LONG).show()
-            }else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                Toast.makeText(this, "Invalid Email", Toast.LENGTH_SHORT).show()
-            }else if(password.length<7){
-                Toast.makeText(this, "Password must be atleast 6", Toast.LENGTH_SHORT).show()
-            } else{
-                auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, OnCompleteListener { task ->
-                    if(task.isSuccessful) {
-                        Toast.makeText(this, "Successfully Logged In", Toast.LENGTH_LONG).show()
-                        val intent = Intent(this,LoginActivity::class.java)
-                        startActivity(intent)
-                        finish()
-                    }else {
-                        Toast.makeText(this, "Login Failed", Toast.LENGTH_LONG).show()
-                    }
-                })
+            val layout : ScrollView = findViewById(R.id.login_layout)
+
+            if(NetworkHelper.isNetworkConnected(this)){
+                var email: String = loginEmail.text.toString()
+                var password: String = loginPassword.text.toString()
+
+                if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
+                    Toast.makeText(this@LoginActivity, "Please fill all the fields", Toast.LENGTH_LONG).show()
+                }else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                    Toast.makeText(this, "Invalid Email", Toast.LENGTH_SHORT).show()
+                }else if(password.length<7){
+                    Toast.makeText(this, "Password must be atleast 6", Toast.LENGTH_SHORT).show()
+                } else{
+                    auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, OnCompleteListener { task ->
+                        if(task.isSuccessful) {
+                            Toast.makeText(this, "Successfully Logged In", Toast.LENGTH_LONG).show()
+                            val intent = Intent(this,LoginActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }else {
+                            Toast.makeText(this, "Login Failed", Toast.LENGTH_LONG).show()
+                        }
+                    })
+                }
+
+            }else{
+                Snackbar.make(layout,"Sorry! There is no network connection.Please try later",
+                    Snackbar.LENGTH_SHORT).show()
             }
         }
     }

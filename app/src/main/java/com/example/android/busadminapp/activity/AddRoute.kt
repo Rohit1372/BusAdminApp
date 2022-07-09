@@ -5,11 +5,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import com.example.android.busadminapp.R
+import com.example.android.busadminapp.utils.NetworkHelper
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -33,34 +32,32 @@ class AddRoute : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = "Add Bus Routes"
 
-        /*from = findViewById(R.id.from_add_routes)
-        to = findViewById(R.id.to_add_routes)*/
-
         val id :String = intent.getStringExtra("id").toString()
-
-        /*val routeFrom = intent.getStringExtra("From").toString()
-        val routeTo = intent.getStringExtra("To").toString()*/
-
-        /*from.text = routeFrom
-        to.text = routeTo*/
 
         stopNo = findViewById(R.id.stopNo)
         stopAt = findViewById(R.id.stopAt)
-       //stopTime = findViewById(R.id.stopTime)
 
         addRoute = findViewById(R.id.add_route)
 
+        val layout : ScrollView = findViewById(R.id.addRouteLayout)
+
         addRoute.setOnClickListener {
-            val stopNo = stopNo.text.toString()
-            val stopAt = stopAt.text.toString()
-            //val stopTime = stopTime.text.toString()
 
-            if(TextUtils.isEmpty(stopNo) || TextUtils.isEmpty(stopAt) ){
-                Toast.makeText(this,"Please fill all the fields", Toast.LENGTH_SHORT).show()
-            } else{
+            if(NetworkHelper.isNetworkConnected(this)){
+                val stopNo = stopNo.text.toString()
+                val stopAt = stopAt.text.toString()
 
-                saveFireStore(stopNo,stopAt,id)
+                if(TextUtils.isEmpty(stopNo) || TextUtils.isEmpty(stopAt) ){
+                    Toast.makeText(this,"Please fill all the fields", Toast.LENGTH_SHORT).show()
+                } else{
 
+                    saveFireStore(stopNo,stopAt,id)
+
+                }
+
+            }else{
+                Snackbar.make(layout,"Sorry! There is no network connection.Please try later",
+                    Snackbar.LENGTH_SHORT).show()
             }
 
         }

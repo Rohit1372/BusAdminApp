@@ -6,8 +6,11 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.TextView
 import com.example.android.busadminapp.R
+import com.example.android.busadminapp.utils.NetworkHelper
+import com.google.android.material.snackbar.Snackbar
 
 class SplashScreenActivity : AppCompatActivity() {
     lateinit var splashImage : ImageView
@@ -19,6 +22,8 @@ class SplashScreenActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
+        val mainLayout = findViewById<RelativeLayout>(R.id.mainLayout)
+
         splashImage = findViewById(R.id.splashimage1)
         splashText = findViewById(R.id.splashText)
 
@@ -29,11 +34,16 @@ class SplashScreenActivity : AppCompatActivity() {
         splashText.startAnimation(bottomAnim)
 
         val splashScreenTimeOut = 3000
-        val intent = Intent(this,LoginActivity::class.java)
-        Handler().postDelayed({
-            startActivity(intent)
-            finish()
-        },splashScreenTimeOut.toLong())
+
+        if(NetworkHelper.isNetworkConnected(this)){
+            val intent = Intent(this,LoginActivity::class.java)
+            Handler().postDelayed({
+                startActivity(intent)
+                finish()
+            },splashScreenTimeOut.toLong())
+        }else{
+            Snackbar.make(mainLayout,"Sorry! There is no network connection.Please try later",Snackbar.LENGTH_INDEFINITE).show()
+        }
 
     }
 }
