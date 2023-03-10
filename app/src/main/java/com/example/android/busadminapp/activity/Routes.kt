@@ -69,7 +69,7 @@ class Routes : AppCompatActivity() {
 
         }else{
             progressBar.visibility= View.VISIBLE
-            Snackbar.make(relativeLayout,"Sorry! There is no network connection.Please try later",
+            Snackbar.make(relativeLayout,"Sorry! There is no network connection.Please try later.",
                 Snackbar.LENGTH_INDEFINITE).show()
         }
 
