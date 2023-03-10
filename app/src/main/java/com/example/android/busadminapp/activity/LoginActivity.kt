@@ -90,20 +90,25 @@ class LoginActivity : AppCompatActivity() {
                 var password: String = loginPassword.text.toString()
 
                 if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
-                    Toast.makeText(this@LoginActivity, "Please fill all the fields", Toast.LENGTH_LONG).show()
+                    Snackbar.make(layout,"Please fill all the fields",
+                        Snackbar.LENGTH_LONG).show()
                 }else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                    Toast.makeText(this, "Invalid Email", Toast.LENGTH_SHORT).show()
+                    Snackbar.make(layout,"Invalid Email",
+                        Snackbar.LENGTH_LONG).show()
                 }else if(password.length<7){
-                    Toast.makeText(this, "Password must be atleast 6", Toast.LENGTH_SHORT).show()
+                    Snackbar.make(layout,"Password must be atleast 6",
+                        Snackbar.LENGTH_LONG).show()
                 } else{
                     auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, OnCompleteListener { task ->
                         if(task.isSuccessful) {
-                            Toast.makeText(this, "Successfully Logged In", Toast.LENGTH_LONG).show()
+                            Snackbar.make(layout,"Successfully Logged In",
+                                Snackbar.LENGTH_LONG).show()
                             val intent = Intent(this,LoginActivity::class.java)
                             startActivity(intent)
                             finish()
                         }else {
-                            Toast.makeText(this, "Login Failed", Toast.LENGTH_LONG).show()
+                            Snackbar.make(layout,"Authentication failed",
+                                Snackbar.LENGTH_LONG).show()
                         }
                     })
                 }

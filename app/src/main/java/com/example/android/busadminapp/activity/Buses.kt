@@ -112,7 +112,6 @@ class Buses : AppCompatActivity() {
     }
 
     //Searching
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.search_buses,menu)
 

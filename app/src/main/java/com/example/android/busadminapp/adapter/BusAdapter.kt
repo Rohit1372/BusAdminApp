@@ -76,10 +76,10 @@ class BusAdapter(private val context:Context, private var busList:ArrayList<Bus>
                 .delete()
                 .addOnSuccessListener {
                     busList.remove(currentBus)
-                    Toast.makeText(context,"Data is Deleted",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context,"Bus Deleted Successfully",Toast.LENGTH_LONG).show()
                     notifyDataSetChanged()
                 }.addOnFailureListener {
-                    Toast.makeText(context,"Failed to delete data",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context,"Failed to delete Bus",Toast.LENGTH_LONG).show()
                 }
         }
 

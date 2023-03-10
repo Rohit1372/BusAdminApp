@@ -6,14 +6,13 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import android.widget.Toast
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.busadminapp.R
 import com.example.android.busadminapp.R.id.relativeLayout_bookedseat
 import com.example.android.busadminapp.adapter.BookedSeatAdapter
-import com.example.android.busadminapp.adapter.RouteAdapter
 import com.example.android.busadminapp.model.BookedSeat
-import com.example.android.busadminapp.model.Route
 import com.example.android.busadminapp.utils.NetworkHelper
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.ktx.firestore
@@ -36,8 +35,10 @@ class BookedSeatsActivity : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.recyclerView_bookedseat)
 
+        val id : String = intent.getStringExtra("id").toString()
+
         bookedSeatlist = ArrayList()
-        bookedSeatAdapter = BookedSeatAdapter(this,bookedSeatlist)
+        bookedSeatAdapter = BookedSeatAdapter(this,bookedSeatlist,id)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = bookedSeatAdapter
 
@@ -54,6 +55,23 @@ class BookedSeatsActivity : AppCompatActivity() {
             Snackbar.make(relativeLayout,"Sorry! There is no network connection.Please try later",
                 Snackbar.LENGTH_INDEFINITE).show()
         }
+
+        // Swipe to delete
+        val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT){
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                bookedSeatAdapter.deleteItem(viewHolder.adapterPosition)
+            }
+
+        })
+        itemTouchHelper.attachToRecyclerView(recyclerView)
 
     }
 

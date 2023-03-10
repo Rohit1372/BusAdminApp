@@ -5,11 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.busadminapp.R
 import com.example.android.busadminapp.model.BookedSeat
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
-class BookedSeatAdapter(val context:Context,val bookedList : ArrayList<BookedSeat>):RecyclerView.Adapter<BookedSeatAdapter.BookedSeatAdapterViewHolder>(){
+class BookedSeatAdapter(val context:Context,val bookedList : ArrayList<BookedSeat>,var id : String):RecyclerView.Adapter<BookedSeatAdapter.BookedSeatAdapterViewHolder>(){
 
     class BookedSeatAdapterViewHolder(view:View):RecyclerView.ViewHolder(view){
         val name : TextView = view.findViewById(R.id.name_text)
@@ -38,6 +42,30 @@ class BookedSeatAdapter(val context:Context,val bookedList : ArrayList<BookedSea
 
     override fun getItemCount(): Int {
         return bookedList.size
+    }
+
+    fun deleteItem(position: Int){
+        val bookedSeat: MutableMap<String, Any> = HashMap()
+        val list = bookedList[position]
+
+        bookedSeat["Name"] = list.name
+        bookedSeat["Phone No."] = list.phoneNo
+        bookedSeat["Email"] = list.email
+        bookedSeat["Number Of Seats"] = list.noOfSeats
+        bookedSeat["Selected Seats"] = list.selectedSeats
+        bookedSeat["Total Price"] = list.totalPrice
+
+        val db = Firebase.firestore
+
+        db.collection("Buses").document(id).update("BookedSeats", FieldValue.arrayRemove(bookedSeat))
+            .addOnSuccessListener {
+                bookedList.remove(list)
+                Toast.makeText(context,"Booked seats Deleted Successfully", Toast.LENGTH_LONG).show()
+                notifyDataSetChanged()
+            }
+            .addOnFailureListener {
+                Toast.makeText(context,"Failed to delete data", Toast.LENGTH_LONG).show()
+            }
     }
 
 }

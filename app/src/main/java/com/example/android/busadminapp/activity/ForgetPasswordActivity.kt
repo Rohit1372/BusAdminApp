@@ -47,18 +47,20 @@ class ForgetPasswordActivity : AppCompatActivity() {
             if(NetworkHelper.isNetworkConnected(this)){
                 var email: String = emailEt.text.toString()
                 if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(this, "Please enter email id", Toast.LENGTH_LONG).show()
+                    Snackbar.make(layout,"Please enter email id",
+                        Snackbar.LENGTH_SHORT).show()
                 }else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                    Toast.makeText(this, "Invalid Email", Toast.LENGTH_SHORT).show()
+                    Snackbar.make(layout,"Invalid Email",
+                        Snackbar.LENGTH_SHORT).show()
                 } else {
                     auth.sendPasswordResetEmail(email)
                         .addOnCompleteListener(this, OnCompleteListener { task ->
                             if (task.isSuccessful) {
-                                Toast.makeText(this, "Reset link sent to your email", Toast.LENGTH_LONG)
-                                    .show()
+                                Snackbar.make(layout,"Reset link sent to your email",
+                                    Snackbar.LENGTH_LONG).show()
                             } else {
-                                Toast.makeText(this, "Unable to send reset mail", Toast.LENGTH_LONG)
-                                    .show()
+                                Snackbar.make(layout,"Unable to send reset mail",
+                                    Snackbar.LENGTH_LONG).show()
                             }
                         })
                 }

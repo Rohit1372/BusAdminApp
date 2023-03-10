@@ -46,11 +46,11 @@ class RouteAdapter( private val context : Context,private val routeList: ArrayLi
             db.collection("Buses").document(id).update("Routes",FieldValue.arrayRemove(route))
                 .addOnSuccessListener {
                     routeList.remove(currentRoute)
-                    Toast.makeText(context,"Route is deleted",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context,"Route Deleted Successfully",Toast.LENGTH_LONG).show()
                     notifyDataSetChanged()
                 }
                 .addOnFailureListener {
-                    Toast.makeText(context,"Failed to delete route",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context,"Failed to delete route",Toast.LENGTH_LONG).show()
                 }
         }
     }
